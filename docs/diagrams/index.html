@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fleet SDD — diagrams</title>
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --panel: #ffffff;
+    --ink: #0f172a;
+    --muted: #5a6a7e;
+    --edge: #d7dee7;
+    --accent: #b45309;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0e1420;
+      --panel: #161d2b;
+      --ink: #e8edf5;
+      --muted: #97a5b8;
+      --edge: #2a3546;
+      --accent: #f0b352;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px 96px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: system-ui, sans-serif;
+    line-height: 1.55;
+  }
+  main { max-width: 1320px; margin: 0 auto; }
+  header { margin-bottom: 40px; }
+  h1 { font-size: 1.9rem; margin: 0 0 8px; letter-spacing: -0.01em; }
+  .lede { color: var(--muted); max-width: 68ch; margin: 0; }
+  .lede code { font-family: var(--mono); font-size: 0.88em; }
+  nav {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin: 24px 0 0; padding: 0; list-style: none;
+  }
+  nav a {
+    display: inline-block; padding: 6px 12px; border: 1px solid var(--edge);
+    border-radius: 999px; background: var(--panel); color: var(--ink);
+    text-decoration: none; font-size: 0.85rem;
+  }
+  nav a:hover { border-color: var(--accent); color: var(--accent); }
+  figure {
+    margin: 0 0 44px; background: var(--panel);
+    border: 1px solid var(--edge); border-radius: 12px; overflow: hidden;
+  }
+  figcaption { padding: 18px 22px 0; }
+  figcaption h2 { font-size: 1.1rem; margin: 0 0 4px; scroll-margin-top: 24px; }
+  figcaption p { margin: 0; color: var(--muted); font-size: 0.9rem; max-width: 80ch; }
+  figcaption .src {
+    display: inline-block; margin-top: 10px; font-family: var(--mono);
+    font-size: 0.76rem; color: var(--muted);
+  }
+  .frame { padding: 18px 22px 22px; overflow-x: auto; }
+  /* Diagrams paint their own light ground, so they stay legible in dark mode. */
+  .frame img { display: block; min-width: 900px; width: 100%; border-radius: 6px; }
+  footer {
+    margin-top: 8px; padding-top: 24px; border-top: 1px solid var(--edge);
+    color: var(--muted); font-size: 0.86rem;
+  }
+  footer code { font-family: var(--mono); }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Fleet SDD — diagrams</h1>
+    <p class="lede">
+      Four views of the framework. Open this file in a browser, or view the
+      <code>.svg</code> files directly — they render anywhere, including VS Code,
+      GitHub and a PDF export.
+      <br />
+      The first is generated from <code>kit/.sdd/flows/feature.md</code>, so it
+      cannot drift from the flow it documents. Regenerate all four with
+      <code>npm run diagrams</code>.
+    </p>
+    <nav>
+      <a href="#lifecycle">1 · Feature flow</a>
+      <a href="#mapping">2 · SDLC &amp; STLC</a>
+      <a href="#integrations">3 · Tooling</a>
+      <a href="#skills">4 · Skills</a>
+      <a href="../../README.md">README</a>
+    </nav>
+  </header>
+
+  <figure>
+    <figcaption>
+      <h2 id="lifecycle">1 · The feature flow</h2>
+      <p>
+        Six stages, each producing one artifact and opened by gates rather than by
+        a date. Diamond-marked roles — Security, Performance, Observability and
+        Support — hold gates at design time rather than reviewing finished work.
+      </p>
+      <span class="src">generated from kit/.sdd/flows/feature.md</span>
+    </figcaption>
+    <div class="frame"><img src="lifecycle.svg" alt="Six Fleet SDD stages with their artifacts, roles and gates" /></div>
+  </figure>
+
+  <figure>
+    <figcaption>
+      <h2 id="mapping">2 · How it maps onto SDLC and STLC</h2>
+      <p>
+        Fleet SDD does not replace your lifecycle — it gives each phase an
+        artifact, an owner and a gate. Note that testing enters at requirements,
+        not at build, and that operations sits inside the lifecycle rather than
+        after it.
+      </p>
+    </figcaption>
+    <div class="frame"><img src="sdlc-stlc-mapping.svg" alt="SDLC phases, Fleet SDD stages and STLC phases mapped against each other" /></div>
+  </figure>
+
+  <figure>
+    <figcaption>
+      <h2 id="integrations">3 · How it fits your tooling</h2>
+      <p>
+        Markdown in git is the source of truth. AI tools read
+        <code>.sdd/</code> and restate nothing; trackers and test-management
+        systems connect through an adapter that is one file in your own repo.
+      </p>
+    </figcaption>
+    <div class="frame"><img src="integrations.svg" alt="Fleet SDD artifacts at the centre, AI tooling on the left, third-party tools on the right" /></div>
+  </figure>
+
+  <figure>
+    <figcaption>
+      <h2 id="skills">4 · Skills compose with the framework</h2>
+      <p>
+        The framework defines the process; skills are how a particular job gets
+        done well. Skills read <code>.sdd/</code> and it never reads them — so
+        editing a checklist improves every skill, and the two cannot drift apart.
+      </p>
+    </figcaption>
+    <div class="frame"><img src="skills.svg" alt="Three sources of skills feeding into the .sdd definitions and then into feature artifacts" /></div>
+  </figure>
+
+  <footer>
+    Source: <code>docs/diagrams/build.mjs</code> — zero dependencies, like the
+    rest of the repo. <code>npm test</code> regenerates these and fails if the
+    committed files are stale, so a flow change cannot leave a diagram lying.
+  </footer>
+</main>
+</body>
+</html>

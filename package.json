@@ -1,0 +1,32 @@
+{
+  "name": "fleet-sdd",
+  "version": "1.0.0",
+  "description": "Fleet SDD - a small, portable spec-driven development kit for multi-role delivery teams and AI agents.",
+  "type": "module",
+  "bin": {
+    "fleet-sdd": "cli/sdd.mjs"
+  },
+  "files": [
+    "cli",
+    "kit",
+    "docs",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node test/run.mjs",
+    "sdd": "node cli/sdd.mjs",
+    "diagrams": "node docs/diagrams/build.mjs"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "keywords": [
+    "spec-driven-development",
+    "sdd",
+    "agents",
+    "claude-code",
+    "agile"
+  ],
+  "license": "MIT",
+  "dependencies": {}
+}

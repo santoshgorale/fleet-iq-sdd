@@ -1,0 +1,132 @@
+feature: "000-fleet-sdd-framework"
+title: Fleet SDD framework
+flow: feature
+tier: standard
+created: "2026-08-21"
+owner: varun.mathur@acldigital.com
+gates:
+  spec.product:
+    status: approved
+    by: varun.mathur@acldigital.com
+    at: "2026-08-21"
+    note: >-
+      Four named failure modes, twelve testable criteria. Scope explicitly
+      excludes CI enforcement, a server, and per-role documents.
+  spec.ux:
+    status: approved
+    by: varun.mathur@acldigital.com
+    at: "2026-08-21"
+    note: >-
+      The experience is a terminal. Seven states specified; colour is never the
+      only signal and NO_COLOR is honoured.
+  design.architecture:
+    status: approved
+    by: varun.mathur@acldigital.com
+    at: "2026-08-21"
+    note: >-
+      Kit plus thin CLI. Six alternatives recorded with the reason each lost,
+      including the two that were tried and reversed.
+  design.security:
+    status: approved
+    by: varun.mathur@acldigital.com
+    at: "2026-08-21"
+    note: >-
+      Credentials from environment only. The ledger is attributable, not
+      authenticated -- stated explicitly so it is never mistaken for access
+      control.
+  design.performance:
+    status: approved
+    by: varun.mathur@acldigital.com
+    at: "2026-08-21"
+    note: >-
+      Budgets set so that reading every .sdd file per invocation stays cheap --
+      that is what makes registration-free discovery affordable.
+  design.observability:
+    status: approved
+    by: varun.mathur@acldigital.com
+    at: "2026-08-21"
+    note: >-
+      No runtime telemetry, deliberately: a tool that tells teams to minimise
+      personal data in telemetry cannot collect any itself. The three CI
+      self-checks are the signals.
+  tasks.scope:
+    status: approved
+    by: varun.mathur@acldigital.com
+    at: "2026-08-21"
+    note: >-
+      All 12 criteria traced. T18/T19/T21/T22 recorded as documentation
+      obligations rather than scope creep. No external dependencies.
+  tasks.testability:
+    status: approved
+    by: varun.mathur@acldigital.com
+    at: "2026-08-21"
+    note: >-
+      Real installs in temp directories instead of mocks -- the likely bugs are
+      in the interaction between parser, ledger and filesystem, which a mock
+      would hide.
+  build.implementation:
+    status: approved
+    by: varun.mathur@acldigital.com
+    at: "2026-08-21"
+    note: >-
+      37 tests green on Node 16.20.2. Backfill of Jira --apply against a live
+      instance recorded as deliberately uncovered.
+  build.code-review:
+    status: approved
+    by: varun.mathur@acldigital.com
+    at: "2026-08-21"
+    note: >-
+      Both design deviations (tier artifact derivation, engines >=16)
+      reconciled into design.md before approval rather than left as drift.
+  build.pipeline:
+    status: approved
+    by: varun.mathur@acldigital.com
+    at: "2026-08-21"
+    note: >-
+      The kit validating itself is a merge blocker. That check is what would
+      have caught DEF-2 on the first commit.
+  prove.functional:
+    status: approved
+    by: varun.mathur@acldigital.com
+    at: "2026-08-21"
+    note: >-
+      All 12 criteria, 7 CLI states and 5 failure modes verified. Six defects
+      found and fixed; none open.
+  prove.security:
+    status: approved
+    by: varun.mathur@acldigital.com
+    at: "2026-08-21"
+    note: >-
+      Path traversal and shell injection attempted via feature titles and
+      checklist paths, both contained. Ledger-is-not-authentication accepted as
+      residual risk.
+  prove.performance:
+    status: approved
+    by: varun.mathur@acldigital.com
+    at: "2026-08-21"
+    note: >-
+      Measured on the slowest available machine, so conservative. check at 50
+      features is 610ms against a 1500ms budget.
+  operate.monitoring:
+    status: approved
+    by: varun.mathur@acldigital.com
+    at: "2026-08-21"
+    note: >-
+      Three CI self-checks, each deliberately triggered by breaking the thing
+      it watches. doctor and status verified against an install with edits, an
+      override and a stale .new file.
+  operate.support-readiness:
+    status: approved
+    by: varun.mathur@acldigital.com
+    at: "2026-08-21"
+    note: >-
+      Six anticipated questions with answers, five self-serve diagnostics, and
+      an S3 path for reporting that a gate produces no value -- which
+      constitution P10 explicitly invites.
+  operate.release:
+    status: approved
+    by: varun.mathur@acldigital.com
+    at: "2026-08-21"
+    note: >-
+      Rollback is `git checkout -- .sdd`, tested on a scratch repo. No state
+      outside git, which is what makes that complete.

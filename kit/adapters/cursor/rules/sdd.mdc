@@ -1,0 +1,57 @@
+---
+description: Fleet SDD - spec-driven development rules for this repo
+globs: ["**/*"]
+alwaysApply: true
+---
+
+# Fleet SDD
+
+This repo uses spec-driven development. Work is defined in artifacts under
+`docs/specs/<nnn-slug>/` and gated by a sign-off ledger (`gates.yml`).
+
+## Before writing code
+
+Run `npx fleet-sdd next`. It prints the active stage, the artifact it produces,
+the blocking gates and the role that owns each one. Treat it as the authority —
+do not infer the state of work by reading the repo.
+
+**No production code without an approved `spec.md`**, and beyond tier `tiny`, an
+approved `design.md`. If you cannot name the feature directory your change
+belongs to, stop and ask.
+
+## Artifacts
+
+| File | Holds |
+| --- | --- |
+| `spec.md` | Problem, users, scope, acceptance criteria, UX states |
+| `design.md` | Approach, data, interfaces, security, performance, observability |
+| `tasks.md` | Task table, traceability to criteria, test approach |
+| `evidence.md` | What was built, and what was proven |
+| `runbook.md` | Alerts, deploy and rollback, support triage |
+| `gates.yml` | Who signed off on what |
+
+## Rules
+
+1. Read `.sdd/constitution.md` before touching an artifact. It outranks
+   convenience.
+2. Read `.sdd/roles/<role>.md` before writing as that role. Check
+   `.sdd/overrides/` first — overrides shadow shipped files.
+3. Write only into sections the role `owns`. Several roles share each artifact,
+   and that only works if each stays in its own sections.
+4. Never approve a gate. `fleet-sdd gate <id> approve` is a human accepting
+   accountability. Do the work, report it, offer the command.
+5. Leave `TODO(sdd)` where you genuinely do not know. Invented content that
+   reads as settled is worse than an honest gap.
+6. Run `npx fleet-sdd check` before claiming to be finished.
+
+## Commands
+
+```bash
+npx fleet-sdd next          # what is next, and who owns it
+npx fleet-sdd status        # every feature and its blockers
+npx fleet-sdd check         # validate artifacts and gates
+npx fleet-sdd roles [id]    # list roles, or print one in full
+```
+
+Adding a role is dropping a Markdown file in `.sdd/roles/`. See
+`.sdd/EXTENDING.md`.

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 500" width="100%" role="img" aria-label="How skills compose with the Fleet SDD framework">
+<title>How skills compose with the Fleet SDD framework</title>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8" />
+  </marker>
+  <marker id="arrowInk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#0f172a" />
+  </marker>
+</defs>
+<rect x="0" y="0" width="1060" height="500" fill="#ffffff" />
+<text x="24" y="36" font-family="system-ui, sans-serif" font-size="17" fill="#0f172a" font-weight="700">Skills compose with the framework</text>
+<text x="24" y="57" font-family="system-ui, sans-serif" font-size="11.5" fill="#64748b">Fleet SDD defines the process. Skills are how a particular job gets done well. Neither has to know the other exists.</text>
+<rect x="24" y="90" width="321.3333333333333" height="118" rx="8" fill="#f0fdf4" stroke="#15803d" stroke-width="1" />
+<text x="38" y="114" font-family="system-ui, sans-serif" font-size="12.5" fill="#15803d" font-weight="700">sdd-review</text>
+<text x="38" y="134" font-family="system-ui, sans-serif" font-size="10.5" fill="#0f172a">Ships with the kit. Reviews an artifact against the</text>
+<text x="38" y="148" font-family="system-ui, sans-serif" font-size="10.5" fill="#0f172a">checklists of every role that owns part of it.</text>
+<text x="38" y="162" font-family="system-ui, sans-serif" font-size="10.5" fill="#0f172a">Contains no role knowledge of its own.</text>
+<line x1="184.66666666666666" y1="212" x2="184.66666666666666" y2="250" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrow)" />
+<rect x="369.3333333333333" y="90" width="321.3333333333333" height="118" rx="8" fill="#fffbeb" stroke="#b45309" stroke-width="1" />
+<text x="383.3333333333333" y="114" font-family="system-ui, sans-serif" font-size="12.5" fill="#b45309" font-weight="700">Your own</text>
+<text x="383.3333333333333" y="134" font-family="system-ui, sans-serif" font-size="10.5" fill="#0f172a">Craft a role file should not carry: house-style</text>
+<text x="383.3333333333333" y="148" font-family="system-ui, sans-serif" font-size="10.5" fill="#0f172a">PRDs, your threat-model method, a SQL migration</text>
+<text x="383.3333333333333" y="162" font-family="system-ui, sans-serif" font-size="10.5" fill="#0f172a">review. Write it thin — have it read .sdd/.</text>
+<line x1="530" y1="212" x2="530" y2="250" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrow)" />
+<rect x="714.6666666666666" y="90" width="321.3333333333333" height="118" rx="8" fill="#eef2ff" stroke="#1d4ed8" stroke-width="1" />
+<text x="728.6666666666666" y="114" font-family="system-ui, sans-serif" font-size="12.5" fill="#1d4ed8" font-weight="700">From elsewhere</text>
+<text x="728.6666666666666" y="134" font-family="system-ui, sans-serif" font-size="10.5" fill="#0f172a">A marketplace or another team. Drops into</text>
+<text x="728.6666666666666" y="148" font-family="system-ui, sans-serif" font-size="10.5" fill="#0f172a">.claude/skills/ and works. Name it in a role’s "Do</text>
+<text x="728.6666666666666" y="162" font-family="system-ui, sans-serif" font-size="10.5" fill="#0f172a">this" steps to wire it into the flow.</text>
+<line x1="875.3333333333333" y1="212" x2="875.3333333333333" y2="250" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrow)" />
+<rect x="24" y="254" width="1012" height="74" rx="8" fill="#f8fafc" stroke="#0f172a" stroke-width="1.5" />
+<text x="42" y="280" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#0f172a" font-weight="700">.sdd/</text>
+<text x="42" y="300" font-family="system-ui, sans-serif" font-size="10.5" fill="#64748b">roles · checklists · flows · constitution</text>
+<text x="590" y="282" font-family="system-ui, sans-serif" font-size="10.5" fill="#b45309" text-anchor="middle">skills read this; it never reads them</text>
+<text x="590" y="300" font-family="system-ui, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">so editing a checklist improves every skill, and neither can drift</text>
+<line x1="530" y1="332" x2="530" y2="366" stroke="#94a3b8" stroke-width="1" marker-end="url(#arrow)" />
+<rect x="24" y="370" width="1012" height="58" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1" />
+<text x="530" y="396" font-family="system-ui, sans-serif" font-size="11.5" fill="#0f172a" font-weight="600" text-anchor="middle">docs/specs/&lt;feature&gt;/  —  work from every source lands in the same artifacts</text>
+<text x="530" y="414" font-family="system-ui, sans-serif" font-size="10" fill="#64748b" text-anchor="middle">reviewed in one diff, gated by one ledger</text>
+<text x="24" y="460" font-family="system-ui, sans-serif" font-size="10.5" fill="#64748b">Or skip skills entirely — six slash commands cover the lifecycle, and every artifact is readable by a person with no AI tooling at all.</text>
+</svg>

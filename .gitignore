@@ -1,0 +1,9 @@
+node_modules/
+.DS_Store
+*.log
+
+# Fleet SDD local state (per-developer, not shared)
+.sdd/.current
+
+# Upgrade artifacts produced by `fleet-sdd init` on locally modified files
+*.new

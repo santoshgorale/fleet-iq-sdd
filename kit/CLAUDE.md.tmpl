@@ -1,0 +1,23 @@
+## Project instructions
+
+@AGENTS.md
+
+## Fleet SDD quick reference
+
+Start any piece of work with `/sdd:next`. It reads the gate ledger and tells you
+the stage, the artifact and the role that owns the blocking gate.
+
+| Command | Does |
+| --- | --- |
+| `/sdd:next` | What is next, then do that role's work |
+| `/sdd:role <id>` | Work as a named role regardless of stage |
+| `/sdd:new "<title>"` | Scaffold a feature and start framing it |
+| `/sdd:check` | Validate artifacts and gates |
+| `/sdd:gate <id> [verdict]` | Review against the checklist, or record a verdict |
+| `/sdd:status` | Every feature and what is blocking it |
+
+The `sdd-review` skill reviews an artifact against the checklists of every role
+that owns part of it — use it before a human signs a gate.
+
+**Two things not to do:** never run `fleet-sdd gate ... approve` on a human's
+behalf, and never delete a `TODO(sdd)` marker to make `check` pass.

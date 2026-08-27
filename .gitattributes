@@ -1,0 +1,15 @@
+# Fleet SDD is authored on Windows and consumed on POSIX CI.
+# Normalise everything the framework owns to LF so hashes in .sdd/.manifest.json
+# stay stable across platforms.
+* text=auto eol=lf
+
+*.md   text eol=lf
+*.mjs  text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+*.mdc  text eol=lf
+
+*.png binary
+*.jpg binary
+*.pdf binary

@@ -1,0 +1,81 @@
+# {{PROJECT}}
+
+## Spec-driven development (Fleet SDD)
+
+This repo uses Fleet SDD. Work is defined in artifacts under `{{SPECS_DIR}}/`
+and gated by a sign-off ledger. Both humans and agents follow the same rules —
+that is the point.
+
+### The rule
+
+**No production code without an approved spec.** For anything beyond tier
+`tiny`, an approved `design.md` too. If you are about to write code and cannot
+name the feature directory it belongs to, stop and ask.
+
+Prototypes and spikes are exempt, and spike code does not ship.
+
+### Where to start
+
+```bash
+npx fleet-sdd next
+```
+
+That prints the active stage, the artifact it produces, which gates are
+blocking, and which role owns each. It is the authority on what to do next —
+more reliable than reading the repo and guessing.
+
+In Claude Code, `/sdd:next` does the same and then loads the right role.
+
+### Three concepts
+
+**Artifacts** are the shared truth, in `{{SPECS_DIR}}/<nnn-slug>/`:
+
+| File | Holds | Owned by |
+| --- | --- | --- |
+| `spec.md` | Problem, users, scope, acceptance criteria, UX | Product, UX |
+| `design.md` | Approach, data, interfaces, security, performance, observability | Architect, Tech Lead, Security, Performance, Observability |
+| `tasks.md` | Task table, traceability, test approach | Product Owner, Tech Lead, Test Lead |
+| `evidence.md` | What was built and what was proven | Developer, QA, Test Lead, DevOps |
+| `runbook.md` | Alerts, deploy and rollback, support triage | Observability, DevOps, Support |
+| `gates.yml` | Who signed off on what, and when | everyone |
+
+**Roles** are lenses on those files, in `.sdd/roles/*.md`. Thirteen ship by
+default. Each declares the sections it `owns` and the `gates` it may sign.
+
+**Flows** are ordered stages with gates, in `.sdd/flows/*.md`: `feature`,
+`bugfix`, `spike`.
+
+### Rules for agents working here
+
+1. **Read the role file before writing.** `.sdd/roles/<role>.md` says what that
+   role does, what it must never sign off on, and which sections it owns. Check
+   `.sdd/overrides/` first — an override shadows the shipped file.
+2. **Stay in your section.** Several roles share each artifact. Writing into
+   another role's section dissolves the ownership the framework depends on. If
+   another role's section blocks you, say so.
+3. **Never approve a gate.** A gate is a person accepting accountability. Do the
+   work, report it, and offer the command. `fleet-sdd gate <id> approve` is for
+   humans.
+4. **Leave `TODO(sdd)` where you do not know.** An honest gap is useful; invented
+   content that reads as settled is not. `check` fails if a placeholder survives
+   sign-off, which is deliberate.
+5. **Read `.sdd/constitution.md` first.** A principle there outranks convenience
+   and any deadline.
+6. **Run `npx fleet-sdd check` before you claim to be finished.** Exit 1 means
+   errors.
+
+### Commands
+
+```bash
+npx fleet-sdd next                       # what is next and who owns it
+npx fleet-sdd new "<title>"              # scaffold a feature
+npx fleet-sdd status                     # every feature, stage, blockers
+npx fleet-sdd check                      # validate artifacts and gates
+npx fleet-sdd roles [id]                 # list roles, or print one
+npx fleet-sdd gate <id> <verdict> -m ""  # record a sign-off (humans)
+```
+
+### Extending
+
+Add a role by dropping a Markdown file in `.sdd/roles/`. No registration, no
+code change. See `.sdd/EXTENDING.md`.

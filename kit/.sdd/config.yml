@@ -1,0 +1,55 @@
+# Fleet SDD configuration.
+#
+# This is the only file the CLI reads for settings. Everything else -- roles,
+# flows, checklists, templates -- is discovered by scanning directories, so
+# adding capability never means editing config. See .sdd/EXTENDING.md.
+
+version: 1
+
+# Where feature artifacts live, relative to the repo root.
+specsDir: docs/specs
+
+# Used by `fleet-sdd new` when --flow / --tier are not given.
+defaultFlow: feature
+defaultTier: standard
+
+# Tiers keep small work small. A tier says which GATES are required;
+# `requiredGates: all` means every gate the flow declares, a list means only
+# those. Required artifacts are then derived -- an artifact is required when the
+# stage producing it has at least one required gate. That keeps tiers
+# flow-agnostic, so `tiny` behaves sensibly on a flow it was never written for.
+#
+# `extraArtifacts` covers files no stage produces, such as a decision record.
+tiers:
+  tiny:
+    description: A change small enough that a one-pager is honest. Copy changes, config, small fixes.
+    requiredGates:
+      - spec.product
+      - tasks.scope
+      - build.code-review
+      - prove.functional
+
+  standard:
+    description: The default. A normal feature with real design, test and operational work.
+    requiredGates: all
+
+  complex:
+    description: >-
+      Cross-team or high-risk work. Same gates as standard plus a written
+      decision record, so the reasoning outlives the people.
+    requiredGates: all
+    extraArtifacts: [decisions.md]
+
+# Optional tracker sync (`fleet-sdd sync`). Dry run is always the default;
+# credentials come from the environment, never from this file.
+tracker:
+  provider: jira
+  projectKey: FIQ
+  issueType: Task
+
+# Which editor adapters `fleet-sdd init` installs. Change with
+# `fleet-sdd init --adapters=claude,cursor,copilot`.
+adapters:
+  claude: true
+  cursor: false
+  copilot: false
